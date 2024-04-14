@@ -1,0 +1,29 @@
+package com.example.neofinanceapi.models;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity
+@Table(name = "\"user\"")
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    private String email;
+
+    private String lastname;
+
+    private String firstname;
+
+    private String username;
+
+    private String password;
+}
