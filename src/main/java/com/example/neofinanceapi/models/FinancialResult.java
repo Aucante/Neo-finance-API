@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,7 +19,7 @@ public class FinancialResult {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Float value;
+    private BigDecimal value;
 
     private String month;
 
