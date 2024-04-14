@@ -3,7 +3,7 @@ services:
   mysql:
     image: mysql:8.3
     restart: unless-stopped
-    container_name: neo-finance-db
+    container_name: neo-finance-db-mysql
     env_file: ./.env
     environment:
       - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
@@ -12,3 +12,18 @@ services:
       - "3307:3306"
     volumes:
       - .data/db:/var/lib/mysql
+  pg:
+    image: postgres:16.2
+    restart: unless-stopped
+    container_name: neo-finance-db-pg
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: $PG_USER
+      POSTGRES_PASSWORD: $PG_PASSWORD
+      POSTGRES_DB: $PG_DATABASE
+
+volumes:
+  pg_data:
