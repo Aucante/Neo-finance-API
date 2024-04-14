@@ -19,5 +19,6 @@ public class Portfolio {
 
     private String name;
 
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private PortfolioType type;
 }
