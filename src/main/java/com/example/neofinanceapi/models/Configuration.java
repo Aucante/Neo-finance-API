@@ -2,21 +2,17 @@ package com.example.neofinanceapi.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
+@SuperBuilder
 @Table(name = "\"configuration\"")
-public class Configuration {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
+public class Configuration extends AbstractDateEntity {
     private String currency;
 
     private Boolean isLightMode;
