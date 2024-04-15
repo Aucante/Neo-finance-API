@@ -20,4 +20,8 @@ public class Configuration {
     private String currency;
 
     private Boolean isLightMode;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

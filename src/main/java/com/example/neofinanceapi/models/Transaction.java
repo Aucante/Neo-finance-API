@@ -31,4 +31,8 @@ public class Transaction {
     private String note;
 
     private Boolean isPurchased;
+
+    @ManyToOne
+    @JoinColumn(name = "portfolio_line_id")
+    private PortfolioLine portfolioLine;
 }

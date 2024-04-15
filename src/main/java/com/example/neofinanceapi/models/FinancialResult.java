@@ -24,4 +24,8 @@ public class FinancialResult {
     private String month;
 
     private Integer year;
+
+    @ManyToOne
+    @JoinColumn(name = "portfolio_id")
+    private Portfolio portfolio;
 }

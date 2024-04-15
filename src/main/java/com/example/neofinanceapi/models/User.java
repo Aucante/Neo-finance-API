@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,4 +28,16 @@ public class User {
     private String username;
 
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    private List<Portfolio> portfolios;
+
+    @OneToOne
+    private Configuration configuration;
+
+    @OneToMany(mappedBy = "user")
+    private List<Income> incomes;
+
+    @OneToMany(mappedBy = "user")
+    private List<Outcome> outcomes;
 }

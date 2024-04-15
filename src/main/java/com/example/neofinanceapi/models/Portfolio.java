@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,4 +23,14 @@ public class Portfolio {
 
     @Enumerated(EnumType.STRING)
     private PortfolioType type;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToMany(mappedBy = "portfolio")
+    private List<PortfolioLine> portfolioLines;
+
+    @OneToMany(mappedBy = "portfolio")
+    private List<FinancialResult> financialResults;
 }

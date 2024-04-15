@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -24,4 +25,7 @@ public class Asset {
     private String abbreviation;
 
     private BigDecimal value;
+
+    @OneToMany(mappedBy = "asset")
+    private List<PortfolioLine> portfolioLines;
 }
