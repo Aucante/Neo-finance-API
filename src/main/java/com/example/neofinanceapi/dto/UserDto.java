@@ -21,7 +21,7 @@ public class UserDto {
 
     private String password;
 
-    public static UserDto fromUser(User user) {
+    public static UserDto fromUserEntity(User user) {
         return UserDto.builder()
                 .email(user.getEmail())
                 .lastname(user.getLastname())
@@ -31,7 +31,7 @@ public class UserDto {
                 .build();
     }
 
-    public static User toUser(UserDto userDto) {
+    public static User toUserEntity(UserDto userDto) {
         return User.builder()
                 .email(userDto.getEmail())
                 .lastname(userDto.getLastname())
