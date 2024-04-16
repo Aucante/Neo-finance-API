@@ -2,11 +2,6 @@ package com.example.neofinanceapi.dto;
 
 import com.example.neofinanceapi.models.Portfolio;
 import com.example.neofinanceapi.models.PortfolioType;
-import com.example.neofinanceapi.models.User;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

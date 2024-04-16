@@ -1,6 +1,5 @@
 package com.example.neofinanceapi.dto;
 
-import com.example.neofinanceapi.models.Portfolio;
 import com.example.neofinanceapi.models.PortfolioLine;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

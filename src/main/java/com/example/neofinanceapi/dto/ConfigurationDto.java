@@ -1,9 +1,6 @@
 package com.example.neofinanceapi.dto;
 
 import com.example.neofinanceapi.models.Configuration;
-import com.example.neofinanceapi.models.User;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
