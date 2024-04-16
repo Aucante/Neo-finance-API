@@ -1,9 +1,6 @@
 package com.example.neofinanceapi.dto;
 
-import com.example.neofinanceapi.models.PortfolioLine;
 import com.example.neofinanceapi.models.Transaction;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
