@@ -1,5 +1,6 @@
 package com.example.neofinanceapi.dto;
 
+import com.example.neofinanceapi.models.Portfolio;
 import com.example.neofinanceapi.models.PortfolioLine;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,11 +19,14 @@ public class PortfolioLineDto {
 
     private AssetDto assetDto;
 
+    private PortfolioDto portfolioDto;
+
     public static PortfolioLineDto fromPortfolioLineEntity(PortfolioLine portfolioLine) {
         return PortfolioLineDto.builder()
                 .id(portfolioLine.getId())
                 .quantity(portfolioLine.getQuantity())
                 .assetDto(AssetDto.fromAssetEntity(portfolioLine.getAsset()))
+                .portfolioDto(PortfolioDto.fromPortfolioEntity(portfolioLine.getPortfolio()))
                 .build();
     }
 
@@ -31,6 +35,7 @@ public class PortfolioLineDto {
                 .id(portfolioLineDto.getId())
                 .quantity(portfolioLineDto.getQuantity())
                 .asset(AssetDto.toAssetEntity(portfolioLineDto.getAssetDto()))
+                .portfolio(PortfolioDto.toPortfolioEntity(portfolioLineDto.getPortfolioDto()))
                 .build();
     }
 }
