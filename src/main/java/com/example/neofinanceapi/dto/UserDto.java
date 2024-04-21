@@ -11,6 +11,8 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 public class UserDto {
+    private Integer id;
+
     private String email;
 
     private String lastname;
@@ -23,6 +25,7 @@ public class UserDto {
 
     public static UserDto fromUserEntity(User user) {
         return UserDto.builder()
+                .id(user.getId())
                 .email(user.getEmail())
                 .lastname(user.getLastname())
                 .firstname(user.getFirstname())
@@ -33,6 +36,7 @@ public class UserDto {
 
     public static User toUserEntity(UserDto userDto) {
         return User.builder()
+                .id(userDto.getId())
                 .email(userDto.getEmail())
                 .lastname(userDto.getLastname())
                 .firstname(userDto.getFirstname())
