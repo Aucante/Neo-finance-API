@@ -15,35 +15,31 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class FinancialResultDto {
 
-    private Integer id;
-
     private BigDecimal value;
 
     private String month;
 
     private Integer year;
 
-    private Integer portfolioDtoId;
+    private Integer portfolioId;
 
     public static FinancialResultDto fromFinancialResultEntity(FinancialResult financialResult) {
         return FinancialResultDto.builder()
-                .id(financialResult.getId())
                 .value(financialResult.getValue())
                 .month(financialResult.getMonth())
                 .year(financialResult.getYear())
-                .portfolioDtoId(financialResult.getId())
+                .portfolioId(financialResult.getPortfolio().getId())
                 .build();
     }
 
     public static FinancialResult toFinancialResultEntity(FinancialResultDto financialResultDto) {
         return FinancialResult.builder()
-                .id(financialResultDto.getId())
                 .value(financialResultDto.getValue())
                 .month(financialResultDto.getMonth())
                 .year(financialResultDto.getYear())
                 .portfolio(
                         Portfolio.builder()
-                                .id(financialResultDto.getId())
+                                .id(financialResultDto.getPortfolioId())
                                 .build()
                 )
                 .build();
