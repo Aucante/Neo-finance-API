@@ -1,6 +1,7 @@
 package com.example.neofinanceapi.dto;
 
 import com.example.neofinanceapi.models.FinancialResult;
+import com.example.neofinanceapi.models.Portfolio;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,7 +23,7 @@ public class FinancialResultDto {
 
     private Integer year;
 
-    private PortfolioDto portfolioDto;
+    private Integer portfolioDtoId;
 
     public static FinancialResultDto fromFinancialResultEntity(FinancialResult financialResult) {
         return FinancialResultDto.builder()
@@ -30,7 +31,7 @@ public class FinancialResultDto {
                 .value(financialResult.getValue())
                 .month(financialResult.getMonth())
                 .year(financialResult.getYear())
-                .portfolioDto(PortfolioDto.fromPortfolioEntity(financialResult.getPortfolio()))
+                .portfolioDtoId(financialResult.getId())
                 .build();
     }
 
@@ -40,7 +41,11 @@ public class FinancialResultDto {
                 .value(financialResultDto.getValue())
                 .month(financialResultDto.getMonth())
                 .year(financialResultDto.getYear())
-                .portfolio(PortfolioDto.toPortfolioEntity(financialResultDto.getPortfolioDto()))
+                .portfolio(
+                        Portfolio.builder()
+                                .id(financialResultDto.getId())
+                                .build()
+                )
                 .build();
     }
 }
