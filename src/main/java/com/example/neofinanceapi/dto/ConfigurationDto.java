@@ -1,6 +1,7 @@
 package com.example.neofinanceapi.dto;
 
 import com.example.neofinanceapi.models.Configuration;
+import com.example.neofinanceapi.models.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,13 +17,13 @@ public class ConfigurationDto {
 
     private Boolean isLightMode;
 
-    private UserDto userDto;
+    private Integer userId;
 
     public static ConfigurationDto fromConfigurationEntity(Configuration configuration) {
         return ConfigurationDto.builder()
                 .currency(configuration.getCurrency())
                 .isLightMode(configuration.getIsLightMode())
-                .userDto(UserDto.fromUserEntity(configuration.getUser()))
+                .userId(configuration.getUser().getId())
                 .build();
     }
 
@@ -30,7 +31,10 @@ public class ConfigurationDto {
         return Configuration.builder()
                 .currency(configurationDto.getCurrency())
                 .isLightMode(configurationDto.getIsLightMode())
-                .user(UserDto.toUserEntity(configurationDto.getUserDto()))
+                .user(
+                    User.builder()
+                        .id(configurationDto.getUserId())
+                        .build())
                 .build();
     }
 }
