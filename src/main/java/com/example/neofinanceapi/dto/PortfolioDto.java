@@ -14,6 +14,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PortfolioDto {
 
+    private Integer id;
+
     private String name;
 
     private PortfolioType type;
@@ -22,6 +24,7 @@ public class PortfolioDto {
 
     public static PortfolioDto fromPortfolioEntity(Portfolio portfolio) {
         return PortfolioDto.builder()
+                .id(portfolio.getId())
                 .name(portfolio.getName())
                 .type(portfolio.getType())
                 .userId(portfolio.getUser().getId())
@@ -30,6 +33,7 @@ public class PortfolioDto {
 
     public static Portfolio toPortfolioEntity(PortfolioDto portfolioDto) {
         return Portfolio.builder()
+                .id(portfolioDto.getId())
                 .name(portfolioDto.getName())
                 .type(portfolioDto.getType())
                 .user(User.builder()
