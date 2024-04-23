@@ -1,5 +1,6 @@
 package com.example.neofinanceapi.dto;
 
+import com.example.neofinanceapi.models.PortfolioLine;
 import com.example.neofinanceapi.models.Transaction;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,7 +30,7 @@ public class TransactionDto {
 
     private Boolean isPurchased;
 
-    private PortfolioLineDto portfolioLineDto;
+    private Integer portfolioLineId;
 
     public static TransactionDto fromTransactionEntity(Transaction transaction) {
         return TransactionDto.builder()
@@ -40,7 +41,7 @@ public class TransactionDto {
                 .fees(transaction.getFees())
                 .note(transaction.getNote())
                 .isPurchased(transaction.getIsPurchased())
-                .portfolioLineDto(PortfolioLineDto.fromPortfolioLineEntity(transaction.getPortfolioLine()))
+                .portfolioLineId(transaction.getId())
                 .build();
     }
 
@@ -53,7 +54,9 @@ public class TransactionDto {
                 .fees(transactionDto.getFees())
                 .note(transactionDto.getNote())
                 .isPurchased(transactionDto.getIsPurchased())
-                .portfolioLine(PortfolioLineDto.toPortfolioLineEntity(transactionDto.getPortfolioLineDto()))
+                .portfolioLine(PortfolioLine.builder()
+                        .id(transactionDto.getPortfolioLineId())
+                        .build())
                 .build();
     }
 }
