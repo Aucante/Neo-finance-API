@@ -1,7 +1,6 @@
 package com.example.neofinanceapi.controllers;
 
 import com.example.neofinanceapi.dto.TransactionDto;
-import com.example.neofinanceapi.dto.UserDto;
 import com.example.neofinanceapi.services.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
