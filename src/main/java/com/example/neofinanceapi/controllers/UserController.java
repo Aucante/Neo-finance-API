@@ -27,18 +27,18 @@ public class UserController {
         return ResponseEntity.ok(userService.findAll());
     }
 
-    @GetMapping("/{user_id}")
+    @GetMapping("/{user-id}")
     public ResponseEntity<UserDto> findById(
-            @PathVariable Integer user_id
+            @PathVariable("user-id") Integer userId
     ) {
-        return ResponseEntity.ok(userService.findById(user_id));
+        return ResponseEntity.ok(userService.findById(userId));
     }
 
-    @DeleteMapping("/{user_id}")
+    @DeleteMapping("/{user-id}")
     public ResponseEntity<Void> deleteById(
-            @PathVariable Integer user_id
+            @PathVariable("user-id") Integer userId
     ) {
-        userService.delete(user_id);
+        userService.delete(userId);
         return ResponseEntity.accepted().build();
     }
 }
