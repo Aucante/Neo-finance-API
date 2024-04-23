@@ -13,6 +13,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ConfigurationDto {
 
+    private Integer id;
+
     private String currency;
 
     private Boolean isLightMode;
@@ -21,6 +23,7 @@ public class ConfigurationDto {
 
     public static ConfigurationDto fromConfigurationEntity(Configuration configuration) {
         return ConfigurationDto.builder()
+                .id(configuration.getId())
                 .currency(configuration.getCurrency())
                 .isLightMode(configuration.getIsLightMode())
                 .userId(configuration.getUser().getId())
@@ -29,6 +32,7 @@ public class ConfigurationDto {
 
     public static Configuration toConfigurationEntity(ConfigurationDto configurationDto) {
         return Configuration.builder()
+                .id(configurationDto.getId())
                 .currency(configurationDto.getCurrency())
                 .isLightMode(configurationDto.getIsLightMode())
                 .user(

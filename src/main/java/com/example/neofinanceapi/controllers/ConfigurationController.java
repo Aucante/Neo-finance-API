@@ -28,18 +28,18 @@ public class ConfigurationController {
         return ResponseEntity.ok(configurationService.findAll());
     }
 
-    @GetMapping("/{configuration_id}")
+    @GetMapping("/{configuration-id}")
     public ResponseEntity<ConfigurationDto> findById(
-            @PathVariable Integer configuration_id
+            @PathVariable("configuration-id") Integer configurationId
     ) {
-        return ResponseEntity.ok(configurationService.findById(configuration_id));
+        return ResponseEntity.ok(configurationService.findById(configurationId));
     }
 
-    @DeleteMapping("/{configuration_id}")
+    @DeleteMapping("/{configuration-id}")
     public ResponseEntity<Void> deleteById(
-            @PathVariable Integer configuration_id
+            @PathVariable("configuration-id") Integer configurationId
     ) {
-        configurationService.delete(configuration_id);
+        configurationService.delete(configurationId);
         return ResponseEntity.accepted().build();
     }
 }
