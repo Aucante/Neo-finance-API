@@ -15,6 +15,8 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class FinancialResultDto {
 
+    private Integer id;
+
     private BigDecimal value;
 
     private String month;
@@ -25,6 +27,7 @@ public class FinancialResultDto {
 
     public static FinancialResultDto fromFinancialResultEntity(FinancialResult financialResult) {
         return FinancialResultDto.builder()
+                .id(financialResult.getId())
                 .value(financialResult.getValue())
                 .month(financialResult.getMonth())
                 .year(financialResult.getYear())
@@ -34,6 +37,7 @@ public class FinancialResultDto {
 
     public static FinancialResult toFinancialResultEntity(FinancialResultDto financialResultDto) {
         return FinancialResult.builder()
+                .id(financialResultDto.getId())
                 .value(financialResultDto.getValue())
                 .month(financialResultDto.getMonth())
                 .year(financialResultDto.getYear())
