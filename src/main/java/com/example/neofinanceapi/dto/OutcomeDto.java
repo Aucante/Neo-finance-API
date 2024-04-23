@@ -1,6 +1,7 @@
 package com.example.neofinanceapi.dto;
 
 import com.example.neofinanceapi.models.Outcome;
+import com.example.neofinanceapi.models.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,7 +26,7 @@ public class OutcomeDto {
 
     private String description;
 
-    private UserDto userDto;
+    private Integer userId;
 
     public static OutcomeDto fromOutcomeEntity(Outcome outcome) {
         return OutcomeDto.builder()
@@ -35,7 +36,7 @@ public class OutcomeDto {
                 .value(outcome.getValue())
                 .type(outcome.getType())
                 .description(outcome.getDescription())
-                .userDto(UserDto.fromUserEntity(outcome.getUser()))
+                .userId(outcome.getId())
                 .build();
     }
 
@@ -47,7 +48,9 @@ public class OutcomeDto {
                 .value(outcomeDto.getValue())
                 .type(outcomeDto.getType())
                 .description(outcomeDto.getDescription())
-                .user(UserDto.toUserEntity(outcomeDto.getUserDto()))
+                .user(User.builder()
+                        .id(outcomeDto.getUserId())
+                        .build())
                 .build();
     }
 }
