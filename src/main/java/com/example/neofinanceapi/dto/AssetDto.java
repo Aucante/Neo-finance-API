@@ -14,6 +14,8 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class AssetDto {
 
+    private Integer id;
+
     private String name;
 
     private String abbreviation;
@@ -22,6 +24,7 @@ public class AssetDto {
 
     public static AssetDto fromAssetEntity(Asset asset) {
         return AssetDto.builder()
+                .id(asset.getId())
                 .name(asset.getName())
                 .abbreviation(asset.getAbbreviation())
                 .value(asset.getValue())
@@ -30,6 +33,7 @@ public class AssetDto {
 
     public static Asset toAssetEntity(AssetDto assetDto) {
         return Asset.builder()
+                .id(assetDto.getId())
                 .name(assetDto.getName())
                 .abbreviation(assetDto.getAbbreviation())
                 .value(assetDto.getValue())

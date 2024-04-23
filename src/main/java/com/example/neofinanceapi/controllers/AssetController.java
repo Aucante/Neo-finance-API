@@ -27,18 +27,18 @@ public class AssetController {
         return ResponseEntity.ok(assetService.findAll());
     }
 
-    @GetMapping("/{asset_id}")
+    @GetMapping("/{asset-id}")
     public ResponseEntity<AssetDto> findById(
-            @PathVariable Integer asset_id
+            @PathVariable("asset-id") Integer assetId
     ) {
-        return ResponseEntity.ok(assetService.findById(asset_id));
+        return ResponseEntity.ok(assetService.findById(assetId));
     }
 
-    @DeleteMapping("/{asset_id}")
+    @DeleteMapping("/{asset-id}")
     public ResponseEntity<Void> deleteById(
-            @PathVariable Integer asset_id
+            @PathVariable("asset-id") Integer assetId
     ) {
-        assetService.delete(asset_id);
+        assetService.delete(assetId);
         return ResponseEntity.accepted().build();
     }
 }
