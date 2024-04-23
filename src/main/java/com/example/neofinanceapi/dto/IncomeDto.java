@@ -1,6 +1,7 @@
 package com.example.neofinanceapi.dto;
 
 import com.example.neofinanceapi.models.Income;
+import com.example.neofinanceapi.models.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,7 +27,7 @@ public class IncomeDto {
 
     private String description;
 
-    private UserDto userDto;
+    private Integer userId;
 
     public static IncomeDto fromIncomeEntity(Income income) {
         return IncomeDto.builder()
@@ -36,7 +37,7 @@ public class IncomeDto {
                 .value(income.getValue())
                 .type(income.getType())
                 .description(income.getDescription())
-                .userDto(UserDto.fromUserEntity(income.getUser()))
+                .userId(income.getUser().getId())
                 .build();
     }
 
@@ -48,7 +49,9 @@ public class IncomeDto {
                 .value(incomeDto.getValue())
                 .type(incomeDto.getType())
                 .description(incomeDto.getDescription())
-                .user(UserDto.toUserEntity(incomeDto.getUserDto()))
+                .user(User.builder()
+                        .id(incomeDto.getUserId())
+                        .build())
                 .build();
     }
 }
