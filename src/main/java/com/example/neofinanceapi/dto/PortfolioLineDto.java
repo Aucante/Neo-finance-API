@@ -14,6 +14,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PortfolioLineDto {
 
+    private Integer id;
+
     private Long quantity;
 
     private Integer assetId;
@@ -22,6 +24,7 @@ public class PortfolioLineDto {
 
     public static PortfolioLineDto fromPortfolioLineEntity(PortfolioLine portfolioLine) {
         return PortfolioLineDto.builder()
+                .id(portfolioLine.getId())
                 .quantity(portfolioLine.getQuantity())
                 .assetId(portfolioLine.getAsset().getId())
                 .portfolioId(portfolioLine.getPortfolio().getId())
@@ -30,6 +33,7 @@ public class PortfolioLineDto {
 
     public static PortfolioLine toPortfolioLineEntity(PortfolioLineDto portfolioLineDto) {
         return PortfolioLine.builder()
+                .id(portfolioLineDto.getId())
                 .quantity(portfolioLineDto.getQuantity())
                 .asset(
                         Asset.builder()
