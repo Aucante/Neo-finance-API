@@ -1,6 +1,7 @@
 package com.example.neofinanceapi.dto;
 
 import com.example.neofinanceapi.models.User;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,6 +16,7 @@ public class UserDto {
 
     private String email;
 
+    @NotNull
     private String lastname;
 
     private String firstname;

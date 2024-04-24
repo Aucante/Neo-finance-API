@@ -1,6 +1,7 @@
 package com.example.neofinanceapi.services.Impl;
 
 import com.example.neofinanceapi.dto.UserDto;
+import com.example.neofinanceapi.exceptions.ObjectsValidator;
 import com.example.neofinanceapi.models.User;
 import com.example.neofinanceapi.repositories.UserRepository;
 import com.example.neofinanceapi.services.UserService;
@@ -17,8 +18,11 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
+    private final ObjectsValidator<UserDto> validator;
+
     @Override
     public Integer save(UserDto dto) {
+        validator.validate(dto);
         User user = UserDto.toUserEntity(dto);
 
         return userRepository.save(user).getId();
