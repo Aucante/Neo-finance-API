@@ -1,9 +1,9 @@
 package com.example.neofinanceapi.services.Impl;
 
 import com.example.neofinanceapi.dto.ConfigurationDto;
+import com.example.neofinanceapi.exceptions.ObjectsValidator;
 import com.example.neofinanceapi.models.Configuration;
 import com.example.neofinanceapi.repositories.ConfigurationRepository;
-import com.example.neofinanceapi.repositories.UserRepository;
 import com.example.neofinanceapi.services.ConfigurationService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -18,8 +18,11 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 
     private final ConfigurationRepository configurationRepository;
 
+    private final ObjectsValidator<ConfigurationDto> validator;
+
     @Override
     public Integer save(ConfigurationDto dto) {
+        validator.validate(dto);
         Configuration configuration = ConfigurationDto.toConfigurationEntity(dto);
 
         return configurationRepository.save(configuration).getId();
