@@ -1,6 +1,7 @@
 package com.example.neofinanceapi.services.Impl;
 
 import com.example.neofinanceapi.dto.OutcomeDto;
+import com.example.neofinanceapi.exceptions.ObjectsValidator;
 import com.example.neofinanceapi.models.Outcome;
 import com.example.neofinanceapi.repositories.OutcomeRepository;
 import com.example.neofinanceapi.services.OutcomeService;
@@ -17,8 +18,11 @@ public class OutcomeServiceImpl implements OutcomeService {
 
     private final OutcomeRepository outcomeRepository;
 
+    private final ObjectsValidator<OutcomeDto> validator;
+
     @Override
     public Integer save(OutcomeDto dto) {
+        validator.validate(dto);
         Outcome outcome = OutcomeDto.toOutcomeEntity(dto);
 
         return outcomeRepository.save(outcome).getId();
