@@ -3,6 +3,10 @@ package com.example.neofinanceapi.dto;
 import com.example.neofinanceapi.models.Asset;
 import com.example.neofinanceapi.models.Portfolio;
 import com.example.neofinanceapi.models.PortfolioLine;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,10 +20,14 @@ public class PortfolioLineDto {
 
     private Integer id;
 
+    @NotNull(message = "The quantity is required.")
+    @Positive(message = "The quantity must be positive.")
     private Long quantity;
 
+    @NotNull(message = "The asset ID is required.")
     private Integer assetId;
 
+    @NotNull(message = "The portfolio ID is required.")
     private Integer portfolioId;
 
     public static PortfolioLineDto fromPortfolioLineEntity(PortfolioLine portfolioLine) {
