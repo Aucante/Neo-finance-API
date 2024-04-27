@@ -2,6 +2,9 @@ package com.example.neofinanceapi.dto;
 
 import com.example.neofinanceapi.models.FinancialResult;
 import com.example.neofinanceapi.models.Portfolio;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,12 +20,17 @@ public class FinancialResultDto {
 
     private Integer id;
 
+    @NotNull(message = "The value is required.")
+    @Positive(message = "The value must be positive.")
     private BigDecimal value;
 
+    @NotBlank(message = "The month is required.")
     private String month;
 
+    @NotNull(message = "The year is required.")
     private Integer year;
 
+    @NotNull(message = "The portfolio ID is required")
     private Integer portfolioId;
 
     public static FinancialResultDto fromFinancialResultEntity(FinancialResult financialResult) {

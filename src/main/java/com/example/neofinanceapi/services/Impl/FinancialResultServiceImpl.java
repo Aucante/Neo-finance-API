@@ -2,6 +2,7 @@ package com.example.neofinanceapi.services.Impl;
 
 import com.example.neofinanceapi.dto.FinancialResultDto;
 import com.example.neofinanceapi.dto.UserDto;
+import com.example.neofinanceapi.exceptions.ObjectsValidator;
 import com.example.neofinanceapi.models.FinancialResult;
 import com.example.neofinanceapi.models.User;
 import com.example.neofinanceapi.repositories.FinancialResultRepository;
@@ -19,8 +20,11 @@ public class FinancialResultServiceImpl implements FinancialResultService {
 
     private final FinancialResultRepository financialResultRepository;
 
+    private final ObjectsValidator<FinancialResultDto> validator;
+
     @Override
     public Integer save(FinancialResultDto dto) {
+        validator.validate(dto);
         FinancialResult financialResult = FinancialResultDto.toFinancialResultEntity(dto);
 
         return financialResultRepository.save(financialResult).getId();
