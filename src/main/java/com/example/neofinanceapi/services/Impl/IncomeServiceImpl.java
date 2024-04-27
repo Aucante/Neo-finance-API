@@ -1,6 +1,7 @@
 package com.example.neofinanceapi.services.Impl;
 
 import com.example.neofinanceapi.dto.IncomeDto;
+import com.example.neofinanceapi.exceptions.ObjectsValidator;
 import com.example.neofinanceapi.models.Income;
 import com.example.neofinanceapi.repositories.IncomeRepository;
 import com.example.neofinanceapi.services.IncomeService;
@@ -14,10 +15,14 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class IncomeServiceImpl implements IncomeService {
+
     private final IncomeRepository incomeRepository;
+
+    private final ObjectsValidator<IncomeDto> validator;
 
     @Override
     public Integer save(IncomeDto dto) {
+        validator.validate(dto);
         Income income = IncomeDto.toIncomeEntity(dto);
 
         return incomeRepository.save(income).getId();
