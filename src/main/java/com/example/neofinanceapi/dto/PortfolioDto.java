@@ -3,8 +3,6 @@ package com.example.neofinanceapi.dto;
 import com.example.neofinanceapi.models.Portfolio;
 import com.example.neofinanceapi.models.PortfolioType;
 import com.example.neofinanceapi.models.User;
-import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
-import com.fasterxml.jackson.databind.annotation.EnumNaming;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
