@@ -3,8 +3,6 @@ package com.example.neofinanceapi.dto;
 import com.example.neofinanceapi.models.Asset;
 import com.example.neofinanceapi.models.Portfolio;
 import com.example.neofinanceapi.models.PortfolioLine;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
