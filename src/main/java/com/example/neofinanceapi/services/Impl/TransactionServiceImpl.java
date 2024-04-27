@@ -1,6 +1,7 @@
 package com.example.neofinanceapi.services.Impl;
 
 import com.example.neofinanceapi.dto.TransactionDto;
+import com.example.neofinanceapi.exceptions.ObjectsValidator;
 import com.example.neofinanceapi.models.Transaction;
 import com.example.neofinanceapi.repositories.TransactionRepository;
 import com.example.neofinanceapi.services.TransactionService;
@@ -17,8 +18,11 @@ public class TransactionServiceImpl implements TransactionService {
 
     private final TransactionRepository transactionRepository;
 
+    private final ObjectsValidator<TransactionDto> validator;
+
     @Override
     public Integer save(TransactionDto dto) {
+        validator.validate(dto);
         Transaction transaction = TransactionDto.toTransactionEntity(dto);
 
         return transactionRepository.save(transaction).getId();
