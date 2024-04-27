@@ -3,6 +3,10 @@ package com.example.neofinanceapi.dto;
 import com.example.neofinanceapi.models.Portfolio;
 import com.example.neofinanceapi.models.PortfolioType;
 import com.example.neofinanceapi.models.User;
+import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
+import com.fasterxml.jackson.databind.annotation.EnumNaming;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,10 +20,13 @@ public class PortfolioDto {
 
     private Integer id;
 
+    @NotBlank(message = "The name is required.")
     private String name;
 
+    @NotNull(message = "The type is required.")
     private PortfolioType type;
 
+    @NotNull(message = "The user ID is required.")
     private Integer userId;
 
     public static PortfolioDto fromPortfolioEntity(Portfolio portfolio) {

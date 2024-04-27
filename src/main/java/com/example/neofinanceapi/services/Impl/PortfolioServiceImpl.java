@@ -1,6 +1,7 @@
 package com.example.neofinanceapi.services.Impl;
 
 import com.example.neofinanceapi.dto.PortfolioDto;
+import com.example.neofinanceapi.exceptions.ObjectsValidator;
 import com.example.neofinanceapi.models.Portfolio;
 import com.example.neofinanceapi.repositories.PortfolioRepository;
 import com.example.neofinanceapi.services.PortfolioService;
@@ -17,8 +18,11 @@ public class PortfolioServiceImpl implements PortfolioService {
 
     private final PortfolioRepository portfolioRepository;
 
+    private final ObjectsValidator<PortfolioDto> validator;
+
     @Override
     public Integer save(PortfolioDto dto) {
+        validator.validate(dto);
         Portfolio portfolio = PortfolioDto.toPortfolioEntity(dto);
 
         return portfolioRepository.save(portfolio).getId();
