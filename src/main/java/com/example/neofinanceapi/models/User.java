@@ -2,7 +2,6 @@ package com.example.neofinanceapi.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -21,12 +20,15 @@ import java.util.List;
 @SuperBuilder
 @Table(name = "\"user\"")
 public class User extends AbstractDateEntity implements UserDetails {
+
+    @Column(unique = true)
     private String email;
 
     private String lastname;
 
     private String firstname;
 
+    @Column(unique = true)
     private String username;
 
     private String password;
