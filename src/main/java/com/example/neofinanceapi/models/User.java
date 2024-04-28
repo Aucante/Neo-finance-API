@@ -15,7 +15,7 @@ import java.util.List;
 @Entity
 @SuperBuilder
 @Table(name = "\"user\"")
-public class User extends AbstractDateEntity{
+public class User extends AbstractDateEntity {
     private String email;
 
     private String lastname;
@@ -37,4 +37,7 @@ public class User extends AbstractDateEntity{
 
     @OneToMany(mappedBy = "user")
     private List<Outcome> outcomes;
+
+    @OneToOne
+    private Role role;
 }
