@@ -33,10 +33,6 @@ public class UserDto {
     @Size(min = NAME_MIN_SIZE, max = NAME_MAX_SIZE, message = "The firstname must be between " + NAME_MIN_SIZE + " and " + NAME_MAX_SIZE + " characters.")
     private String firstname;
 
-    @NotBlank(message = "Username can't be null.")
-    @Size(min = NAME_MIN_SIZE, max = NAME_MAX_SIZE, message = "The username must be between " + NAME_MIN_SIZE + " and " + NAME_MAX_SIZE + " characters.")
-    private String username;
-
     @NotBlank(message = "Password can't be null.")
     @Size(min = PASSWORD_MIN_SIZE, max = PASSWORD_MAX_SIZE, message = "The password must be between " + PASSWORD_MIN_SIZE + " and " + PASSWORD_MAX_SIZE + " characters.")
     private String password;
@@ -47,7 +43,6 @@ public class UserDto {
                 .email(user.getEmail())
                 .lastname(user.getLastname())
                 .firstname(user.getFirstname())
-                .username(user.getUsername())
                 .password(user.getPassword())
                 .build();
     }
@@ -58,7 +53,6 @@ public class UserDto {
                 .email(userDto.getEmail())
                 .lastname(userDto.getLastname())
                 .firstname(userDto.getFirstname())
-                .username(userDto.getUsername())
                 .password(userDto.getPassword())
                 .build();
     }

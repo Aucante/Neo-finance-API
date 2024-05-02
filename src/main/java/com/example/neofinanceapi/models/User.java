@@ -24,9 +24,6 @@ public class User extends AbstractDateEntity {
 
     private String firstname;
 
-    @Column(unique = true)
-    private String username;
-
     private String password;
 
     @OneToMany(mappedBy = "user")
