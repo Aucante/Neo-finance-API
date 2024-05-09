@@ -6,7 +6,7 @@ target/
 
 .env
 .data
-application.properties
+resources/application.properties
 
 ### STS ###
 .apt_generated
