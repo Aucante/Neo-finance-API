@@ -28,4 +28,10 @@ public class AuthenticationController {
         authenticationService.signup(requestDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
+//    @PostMapping("/signin")
+//    public ResponseEntity<Void> signin(@Valid @RequestBody RegisterUserDto requestDto) {
+//        authenticationService.signin(requestDto);
+//        return ResponseEntity.status(HttpStatus.CREATED).build();
+//    }
 }
