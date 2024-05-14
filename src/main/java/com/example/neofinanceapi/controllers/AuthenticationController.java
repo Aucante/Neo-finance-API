@@ -1,7 +1,10 @@
 package com.example.neofinanceapi.controllers;
 
 import com.example.neofinanceapi.config.JwtService;
+import com.example.neofinanceapi.dto.LoginUserDto;
 import com.example.neofinanceapi.dto.RegisterUserDto;
+import com.example.neofinanceapi.dto.auth.LoginResponse;
+import com.example.neofinanceapi.models.User;
 import com.example.neofinanceapi.services.auth.AuthenticationService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -23,15 +26,20 @@ public class AuthenticationController {
         this.authenticationService = authenticationService;
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/register")
     public ResponseEntity<Void> signup(@Valid @RequestBody RegisterUserDto requestDto) {
         authenticationService.signup(requestDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-//    @PostMapping("/signin")
-//    public ResponseEntity<Void> signin(@Valid @RequestBody RegisterUserDto requestDto) {
-//        authenticationService.signin(requestDto);
-//        return ResponseEntity.status(HttpStatus.CREATED).build();
-//    }
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginUserDto loginUserDto) {
+        User authenticatedUser = authenticationService.authenticate(loginUserDto);
+
+        String jwtToken = jwtService.generateToken(authenticatedUser);
+
+        LoginResponse loginResponse = LoginResponse.builder().token(jwtToken).expiresIn(jwtService.getExpirationTime()).build();
+
+        return ResponseEntity.ok(loginResponse);
+    }
 }
