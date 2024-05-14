@@ -1,7 +1,7 @@
 package com.example.neofinanceapi.services.auth;
 
-import com.example.neofinanceapi.dto.LoginUserDto;
-import com.example.neofinanceapi.dto.RegisterUserDto;
+import com.example.neofinanceapi.dto.auth.LoginUserDto;
+import com.example.neofinanceapi.dto.auth.RegisterUserDto;
 import com.example.neofinanceapi.models.User;
 import com.example.neofinanceapi.repositories.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;

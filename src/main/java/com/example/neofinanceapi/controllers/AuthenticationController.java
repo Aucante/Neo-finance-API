@@ -1,8 +1,8 @@
 package com.example.neofinanceapi.controllers;
 
 import com.example.neofinanceapi.config.JwtService;
-import com.example.neofinanceapi.dto.LoginUserDto;
-import com.example.neofinanceapi.dto.RegisterUserDto;
+import com.example.neofinanceapi.dto.auth.LoginUserDto;
+import com.example.neofinanceapi.dto.auth.RegisterUserDto;
 import com.example.neofinanceapi.dto.auth.LoginResponse;
 import com.example.neofinanceapi.models.User;
 import com.example.neofinanceapi.services.auth.AuthenticationService;

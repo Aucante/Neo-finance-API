@@ -1,4 +1,4 @@
-package com.example.neofinanceapi.dto;
+package com.example.neofinanceapi.dto.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
