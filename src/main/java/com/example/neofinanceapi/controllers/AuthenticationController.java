@@ -27,9 +27,15 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Void> signup(@Valid @RequestBody RegisterUserDto requestDto) {
-        authenticationService.signup(requestDto);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<LoginResponse> signup(@Valid @RequestBody RegisterUserDto requestDto) {
+        User registeredUser = authenticationService.signup(requestDto);
+
+        String jwtToken = jwtService.generateToken(registeredUser);
+
+        LoginResponse loginResponse = LoginResponse.builder().token(jwtToken).expiresIn(jwtService.getExpirationTime()).build();
+
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(loginResponse);
     }
 
     @PostMapping("/login")
