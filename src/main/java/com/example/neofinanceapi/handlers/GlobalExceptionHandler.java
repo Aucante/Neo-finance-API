@@ -2,6 +2,7 @@ package com.example.neofinanceapi.handlers;
 
 import com.example.neofinanceapi.exceptions.OperationNonPermittedException;
 import com.example.neofinanceapi.validators.ObjectValidationException;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.security.SignatureException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -62,7 +63,16 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(SignatureException.class)
-    public ResponseEntity<ExceptionRepresentation> handleException(io.jsonwebtoken.security.SignatureException exception) {
+    public ResponseEntity<ExceptionRepresentation> handleException(SignatureException exception) {
+        ExceptionRepresentation representation = ExceptionRepresentation.builder()
+                .errorMessage(exception.getMessage())
+                .build();
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(representation);
+    }
+
+    @ExceptionHandler(ExpiredJwtException.class)
+    public ResponseEntity<ExceptionRepresentation> handleException(ExpiredJwtException exception) {
         ExceptionRepresentation representation = ExceptionRepresentation.builder()
                 .errorMessage(exception.getMessage())
                 .build();
