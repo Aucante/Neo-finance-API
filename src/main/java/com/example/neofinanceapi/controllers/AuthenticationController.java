@@ -1,7 +1,7 @@
 package com.example.neofinanceapi.controllers;
 
 import com.example.neofinanceapi.config.JwtService;
-import com.example.neofinanceapi.constants.Constant;
+import com.example.neofinanceapi.constants.Message;
 import com.example.neofinanceapi.dto.auth.LoginUserDto;
 import com.example.neofinanceapi.dto.auth.RegisterResponse;
 import com.example.neofinanceapi.dto.auth.RegisterUserDto;
@@ -32,7 +32,7 @@ public class AuthenticationController {
     public ResponseEntity<RegisterResponse> signup(@Valid @RequestBody RegisterUserDto requestDto) {
         User registeredUser = authenticationService.signup(requestDto);
 
-        RegisterResponse registerResponse = RegisterResponse.builder().email(registeredUser.getEmail()).message(Constant.REGISTERED_MESSAGE).build();
+        RegisterResponse registerResponse = RegisterResponse.builder().email(registeredUser.getEmail()).message(Message.REGISTERED_MESSAGE).build();
 
         return ResponseEntity.status(HttpStatus.CREATED).body(registerResponse);
     }
