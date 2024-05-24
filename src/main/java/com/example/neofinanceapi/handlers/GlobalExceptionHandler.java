@@ -2,6 +2,7 @@ package com.example.neofinanceapi.handlers;
 
 import com.example.neofinanceapi.exceptions.OperationNonPermittedException;
 import com.example.neofinanceapi.validators.ObjectValidationException;
+import io.jsonwebtoken.security.SignatureException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -53,6 +54,15 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<ExceptionRepresentation> handleException(BadCredentialsException exception) {
+        ExceptionRepresentation representation = ExceptionRepresentation.builder()
+                .errorMessage("Either email or password are incorrect.")
+                .build();
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(representation);
+    }
+
+    @ExceptionHandler(SignatureException.class)
+    public ResponseEntity<ExceptionRepresentation> handleException(io.jsonwebtoken.security.SignatureException exception) {
         ExceptionRepresentation representation = ExceptionRepresentation.builder()
                 .errorMessage(exception.getMessage())
                 .build();

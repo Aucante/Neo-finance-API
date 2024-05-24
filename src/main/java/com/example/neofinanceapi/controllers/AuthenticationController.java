@@ -1,7 +1,9 @@
 package com.example.neofinanceapi.controllers;
 
 import com.example.neofinanceapi.config.JwtService;
+import com.example.neofinanceapi.constants.Constant;
 import com.example.neofinanceapi.dto.auth.LoginUserDto;
+import com.example.neofinanceapi.dto.auth.RegisterResponse;
 import com.example.neofinanceapi.dto.auth.RegisterUserDto;
 import com.example.neofinanceapi.dto.auth.LoginResponse;
 import com.example.neofinanceapi.models.User;
@@ -27,15 +29,12 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<LoginResponse> signup(@Valid @RequestBody RegisterUserDto requestDto) {
+    public ResponseEntity<RegisterResponse> signup(@Valid @RequestBody RegisterUserDto requestDto) {
         User registeredUser = authenticationService.signup(requestDto);
 
-        String jwtToken = jwtService.generateToken(registeredUser);
+        RegisterResponse registerResponse = RegisterResponse.builder().email(registeredUser.getEmail()).message(Constant.REGISTERED_MESSAGE).build();
 
-        LoginResponse loginResponse = LoginResponse.builder().token(jwtToken).expiresIn(jwtService.getExpirationTime()).build();
-
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(loginResponse);
+        return ResponseEntity.status(HttpStatus.CREATED).body(registerResponse);
     }
 
     @PostMapping("/login")

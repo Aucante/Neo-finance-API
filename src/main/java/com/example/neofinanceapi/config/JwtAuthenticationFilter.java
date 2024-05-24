@@ -1,5 +1,6 @@
 package com.example.neofinanceapi.config;
 
+import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -49,7 +50,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         try {
             final String jwt = authHeader.substring(7);
-            final String userEmail = jwtService.extractUsername(jwt);
+
+            String userEmail;
+            try {
+                userEmail = jwtService.extractUsername(jwt);
+            } catch (SignatureException exception) {
+                throw new SignatureException("Invalid JWT token");
+            }
 
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
