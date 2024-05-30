@@ -1,5 +1,7 @@
 package com.example.neofinanceapi.config;
 
+import com.example.neofinanceapi.constants.Message;
+import com.example.neofinanceapi.services.token.TokenBlacklist;
 import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -24,15 +26,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final HandlerExceptionResolver handlerExceptionResolver;
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
+    private final TokenBlacklist tokenBlacklist;
 
     public JwtAuthenticationFilter(
             JwtService jwtService,
             UserDetailsService userDetailsService,
-            HandlerExceptionResolver handlerExceptionResolver
+            HandlerExceptionResolver handlerExceptionResolver,
+            TokenBlacklist tokenBlacklist
     ) {
         this.jwtService = jwtService;
         this.userDetailsService = userDetailsService;
         this.handlerExceptionResolver = handlerExceptionResolver;
+        this.tokenBlacklist = tokenBlacklist;
     }
 
     @Override
@@ -41,6 +46,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
+
+        String token = tokenBlacklist.extractTokenFromRequest(request);
+
+        if (tokenBlacklist.isBlacklisted(token)) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+
+            throw new SignatureException(Message.INVALID_TOKEN_MESSAGE);
+        }
+
         final String authHeader = request.getHeader("Authorization");
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
@@ -55,7 +69,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             try {
                 userEmail = jwtService.extractUsername(jwt);
             } catch (SignatureException exception) {
-                throw new SignatureException("Invalid JWT token");
+                throw new SignatureException(Message.INVALID_TOKEN_MESSAGE);
             }
 
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

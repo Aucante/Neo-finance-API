@@ -8,6 +8,8 @@ import com.example.neofinanceapi.dto.auth.RegisterUserDto;
 import com.example.neofinanceapi.dto.auth.LoginResponse;
 import com.example.neofinanceapi.models.User;
 import com.example.neofinanceapi.services.auth.AuthenticationService;
+import com.example.neofinanceapi.services.token.TokenBlacklist;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,9 +25,16 @@ public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
 
-    public AuthenticationController(JwtService jwtService, AuthenticationService authenticationService) {
+    private final TokenBlacklist tokenBlacklist;
+
+    public AuthenticationController(
+            JwtService jwtService,
+            AuthenticationService authenticationService,
+            TokenBlacklist tokenBlacklist
+    ) {
         this.jwtService = jwtService;
         this.authenticationService = authenticationService;
+        this.tokenBlacklist = tokenBlacklist;
     }
 
     @PostMapping("/register")
@@ -46,5 +55,13 @@ public class AuthenticationController {
         LoginResponse loginResponse = LoginResponse.builder().token(jwtToken).expiresIn(jwtService.getExpirationTime()).build();
 
         return ResponseEntity.ok(loginResponse);
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(HttpServletRequest request) {
+
+        tokenBlacklist.addBlacklistTokenList(request);
+
+        return ResponseEntity.ok("Logged out successfully");
     }
 }
