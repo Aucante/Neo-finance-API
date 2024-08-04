@@ -13,19 +13,4 @@ public class SampleController {
         return "Spring";
     }
 
-    @GetMapping("/hello")
-    public String sayHello() {
-        return "Hello, world!";
-    }
-
-    @GetMapping("/allo")
-    public String sayAllo() {
-        return "Allo!";
-    }
-
-    @GetMapping("/test")
-    public String sayTest() {
-        return "Test";
-    }
-
 }
