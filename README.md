@@ -2,23 +2,39 @@
 
 Project in JAVA 17 & Spring Boot 3.1.3
 
-## /auth/register
+## Swagger
 
+Reach this url : 
+```bash
+/swagger-ui.html
+```
+
+## Register
+
+#### Url : /auth/register
+Provide these values :
+```bash
 {
     "lastname": "example",
     "email": "example@example.com",
     "password": "example"
 }
+```
 
-## /auth/login
+## Login
 
+#### Url : /auth/login
+Provide these values :
+```bash
 {
     "email": "example@example.com",
     "password": "example"
 }
+```
 
-## /auth/logout
+## Logout
 
+#### Url : /auth/logout
 Fill Bearer token.
 
 
