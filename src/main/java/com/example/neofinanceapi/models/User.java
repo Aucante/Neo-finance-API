@@ -41,6 +41,9 @@ public class User extends AbstractDateEntity implements UserDetails {
     @OneToMany(mappedBy = "user")
     private List<Outcome> outcomes;
 
+    @OneToMany(mappedBy = "user")
+    private List<FinancialMovement> financialMovements;
+
     @OneToOne
     private Role role;
 
