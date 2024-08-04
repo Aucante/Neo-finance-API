@@ -1,7 +1,6 @@
 package com.example.neofinanceapi.dto;
 
 import com.example.neofinanceapi.models.FinancialMovement;
-import com.example.neofinanceapi.models.Income;
 import com.example.neofinanceapi.models.User;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
