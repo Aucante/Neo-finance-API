@@ -35,6 +35,9 @@ public class FinancialMovementDto {
     @NotBlank(message = "The description is required.")
     private String description;
 
+    @NotNull(message = "The income or outcome financial type choice is required.")
+    private Boolean isIncome;
+
     @NotNull(message = "The user ID is required.")
     private Integer userId;
 
@@ -46,6 +49,7 @@ public class FinancialMovementDto {
                 .value(financialMovement.getValue())
                 .type(financialMovement.getType())
                 .description(financialMovement.getDescription())
+                .isIncome(financialMovement.getIsIncome())
                 .userId(financialMovement.getUser().getId())
                 .build();
     }
@@ -58,6 +62,7 @@ public class FinancialMovementDto {
                 .value(financialMovementDto.getValue())
                 .type(financialMovementDto.getType())
                 .description(financialMovementDto.getDescription())
+                .isIncome(financialMovementDto.getIsIncome())
                 .user(User.builder()
                         .id(financialMovementDto.getUserId())
                         .build())

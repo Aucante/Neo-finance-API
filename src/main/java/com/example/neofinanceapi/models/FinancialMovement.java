@@ -29,6 +29,8 @@ public class FinancialMovement {
 
     private String description;
 
+    private Boolean isIncome;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
