@@ -8,6 +8,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -73,6 +74,15 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ExpiredJwtException.class)
     public ResponseEntity<ExceptionRepresentation> handleException(ExpiredJwtException exception) {
+        ExceptionRepresentation representation = ExceptionRepresentation.builder()
+                .errorMessage(exception.getMessage())
+                .build();
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(representation);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ExceptionRepresentation> handleException(HttpMessageNotReadableException exception) {
         ExceptionRepresentation representation = ExceptionRepresentation.builder()
                 .errorMessage(exception.getMessage())
                 .build();

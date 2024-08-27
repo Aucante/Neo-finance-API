@@ -43,4 +43,12 @@ public class PortfolioController {
         portfolioService.delete(portfolioId);
         return ResponseEntity.accepted().build();
     }
+
+    @GetMapping("/user/{user-id}")
+    public ResponseEntity<List<PortfolioDto>> findAllByUserId(
+            @PathVariable("user-id") Integer userId
+    ) {
+        List<PortfolioDto> portfolios = portfolioService.findAllByUserId(userId);
+        return ResponseEntity.ok(portfolios);
+    }
 }

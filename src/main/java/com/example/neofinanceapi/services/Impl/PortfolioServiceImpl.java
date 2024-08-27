@@ -47,4 +47,11 @@ public class PortfolioServiceImpl implements PortfolioService {
     public void delete(Integer id) {
         portfolioRepository.deleteById(id);
     }
+
+    public List<PortfolioDto> findAllByUserId(Integer userId) {
+        List<Portfolio> portfolios = portfolioRepository.findByUserId(userId);
+        return portfolios.stream()
+                .map(PortfolioDto::fromPortfolioEntity)
+                .collect(Collectors.toList());
+    }
 }
