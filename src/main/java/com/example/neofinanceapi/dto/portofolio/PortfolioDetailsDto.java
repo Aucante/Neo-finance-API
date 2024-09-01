@@ -1,5 +1,6 @@
 package com.example.neofinanceapi.dto.portofolio;
 
+import com.example.neofinanceapi.dto.PortfolioDto;
 import com.example.neofinanceapi.dto.PortfolioLineDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,5 +14,6 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class PortfolioDetailsDto {
+    private PortfolioDto portfolio;
     private List<PortfolioLineDto> portfolioLines;
 }

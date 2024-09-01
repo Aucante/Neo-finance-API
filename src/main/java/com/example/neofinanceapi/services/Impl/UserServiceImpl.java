@@ -1,5 +1,6 @@
 package com.example.neofinanceapi.services.Impl;
 
+import com.example.neofinanceapi.dto.PortfolioDto;
 import com.example.neofinanceapi.dto.PortfolioLineDto;
 import com.example.neofinanceapi.dto.UserDto;
 import com.example.neofinanceapi.dto.portofolio.PortfolioDetailsDto;
@@ -64,13 +65,17 @@ public class UserServiceImpl implements UserService {
 
         List<Portfolio> portfolios = portfolioRepository.findAllByUserId(id);
 
+
         List<PortfolioDetailsDto> portfolioDetailsDtos = portfolios.stream()
                 .map(portfolio -> {
+
+                    PortfolioDto portfolioDto = PortfolioDto.fromPortfolioEntity(portfolio);
+
                     List<PortfolioLineDto> portfolioLineDtos = portfolio.getPortfolioLines().stream()
                             .map(PortfolioLineDto::fromPortfolioLineEntity)
                             .collect(Collectors.toList());
 
-                    return new PortfolioDetailsDto(portfolioLineDtos);
+                    return new PortfolioDetailsDto(portfolioDto, portfolioLineDtos);
                 })
                 .collect(Collectors.toList());
 
