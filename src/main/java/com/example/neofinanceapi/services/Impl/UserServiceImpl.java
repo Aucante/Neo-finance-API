@@ -68,9 +68,7 @@ public class UserServiceImpl implements UserService {
 
         List<PortfolioDetailsDto> portfolioDetailsDtos = portfolios.stream()
                 .map(portfolio -> {
-
                     PortfolioDto portfolioDto = PortfolioDto.fromPortfolioEntity(portfolio);
-
                     List<PortfolioLineDto> portfolioLineDtos = portfolio.getPortfolioLines().stream()
                             .map(PortfolioLineDto::fromPortfolioLineEntity)
                             .collect(Collectors.toList());
