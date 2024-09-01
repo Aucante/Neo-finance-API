@@ -49,7 +49,7 @@ public class PortfolioServiceImpl implements PortfolioService {
     }
 
     public List<PortfolioDto> findAllByUserId(Integer userId) {
-        List<Portfolio> portfolios = portfolioRepository.findByUserId(userId);
+        List<Portfolio> portfolios = portfolioRepository.findAllByUserId(userId);
         return portfolios.stream()
                 .map(PortfolioDto::fromPortfolioEntity)
                 .collect(Collectors.toList());

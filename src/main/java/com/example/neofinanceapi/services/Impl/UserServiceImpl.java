@@ -1,8 +1,14 @@
 package com.example.neofinanceapi.services.Impl;
 
+import com.example.neofinanceapi.dto.PortfolioLineDto;
 import com.example.neofinanceapi.dto.UserDto;
+import com.example.neofinanceapi.dto.portofolio.PortfolioDetailsDto;
+import com.example.neofinanceapi.dto.user.UserPortfolioDetailsDto;
 import com.example.neofinanceapi.exceptions.ObjectsValidator;
+import com.example.neofinanceapi.models.Portfolio;
+import com.example.neofinanceapi.models.PortfolioLine;
 import com.example.neofinanceapi.models.User;
+import com.example.neofinanceapi.repositories.PortfolioRepository;
 import com.example.neofinanceapi.repositories.UserRepository;
 import com.example.neofinanceapi.services.UserService;
 import jakarta.persistence.EntityNotFoundException;
@@ -17,6 +23,8 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+
+    private final PortfolioRepository portfolioRepository;
 
     private final ObjectsValidator<UserDto> validator;
 
@@ -46,5 +54,26 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(Integer id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public UserPortfolioDetailsDto findFullPortfolioDetailsById(Integer id) {
+        UserDto userDto = userRepository.findById(id)
+                .map(UserDto::fromUserEntity)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with this provided ID : ." + id));
+
+        List<Portfolio> portfolios = portfolioRepository.findAllByUserId(id);
+
+        List<PortfolioDetailsDto> portfolioDetailsDtos = portfolios.stream()
+                .map(portfolio -> {
+                    List<PortfolioLineDto> portfolioLineDtos = portfolio.getPortfolioLines().stream()
+                            .map(PortfolioLineDto::fromPortfolioLineEntity)
+                            .collect(Collectors.toList());
+
+                    return new PortfolioDetailsDto(portfolioLineDtos);
+                })
+                .collect(Collectors.toList());
+
+        return new UserPortfolioDetailsDto(userDto, portfolioDetailsDtos);
     }
 }
